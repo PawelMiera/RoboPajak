@@ -1,11 +1,11 @@
 <?php
 	session_start();
 	
-	$komenda=$_POST['name'];
+	$komenda=$_POST['var'];
 			
 	//$fileStatus=file_put_contents("datastorage.txt",$komenda,FILE_APPEND);
 		
-	if(isset($_POST['name'])&&isset($_SESSION['email'])&&$_SESSION['admin']==1)
+	if(isset($_POST['var'])&&isset($_SESSION['var2'])&&$_SESSION['admin']==1)
 	{
 		
 	require_once "connect.php";
@@ -40,7 +40,7 @@
 		{	
 
 
-			$rezultat=$polaczenie->query("SELECT * FROM komendy_Edgar ORDER BY id DESC LIMIT 1");
+			$rezultat=$polaczenie->query("SELECT * FROM col ORDER BY id DESC LIMIT 1");
 		
 			if($rezultat)
 			{			
@@ -50,8 +50,8 @@
 			$indeks=$wyniki['id']+1;				
 			
 			if($indeks>100){
-			$polaczenie->query("DELETE FROM komendy_Edgar WHERE 1=1");
-			$polaczenie->query("ALTER TABLE komendy_Edgar AUTO_INCREMENT = 1");			
+			$polaczenie->query("DELETE FROM col WHERE 1=1");
+			$polaczenie->query("ALTER TABLE col AUTO_INCREMENT = 1");			
 			}
 			
 			$rezultat->close();
@@ -62,7 +62,7 @@
 			}
 			
 						
-			$polaczenie->query(sprintf("INSERT INTO `komendy_Edgar`(`komenda`) VALUES ('%s')",mysqli_real_escape_string($polaczenie,$komenda)));
+			$polaczenie->query(sprintf("INSERT INTO `col`(`komenda`) VALUES ('%s')",mysqli_real_escape_string($polaczenie,$komenda)));
 
 			$polaczenie->close();
 			
