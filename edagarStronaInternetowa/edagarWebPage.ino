@@ -99,7 +99,7 @@ void setup() {
    ArduinoOTA.setHostname("edgar");
 
   // No authentication by default
-   ArduinoOTA.setPassword("Asdasd123");
+   ArduinoOTA.setPassword("");
 
   // Password can be set with it's md5 value as well
   // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
@@ -212,8 +212,9 @@ String getCommands()
   bool startId=false;  
   String komenda="";
   String id="";
-  String postData= "lastId="+String(lastId)+"&pass=pajakkomenda";
-  http.begin("http://student.agh.edu.pl/~miera/edgarGetCommands.php");
+  String postData= "variableName="+String(lastId)+"&secondName=secondPostVariable";
+  
+  http.begin("http://your php script link");
   http.addHeader("Content-Type", "application/x-www-form-urlencoded"); 
   int httpCode = http.POST(postData); 
   String payload = http.getString(); 
@@ -261,30 +262,7 @@ String getCommands()
 
 
 
-void logIn(){
-  Serial.println("loguje");
 
-  String postData=  "login=edgar@pajak.com&haslo=robopajak";
-  http.begin("http://student.agh.edu.pl/~miera/logowanie.php");
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded"); 
-  int httpCode = http.POST(postData); 
-  String payload = http.getString();  
-  Serial.println(payload); 
-  lastId=payload.toInt(); 
-  http.end();      
-}
-
-void logOut(){
-    Serial.println("elo320");  
-    String postData= "lastId="+String(lastId)+"&zdarzenie=pajaknara";
-    http.begin("http://student.agh.edu.pl/~miera/edgarLogout.php");
-    http.addHeader("Content-Type", "application/x-www-form-urlencoded"); 
-    int httpCode = http.POST(postData); 
-    String payload = http.getString(); 
-    Serial.println(httpCode);   
-    Serial.println(payload);   
-    http.end();   
-}
 
 
 
