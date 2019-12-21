@@ -1,7 +1,7 @@
 <?php
 
 
-	if(isset($_POST['pass'])&&isset($_POST['lastId'])&&$_POST['pass']=="pajakkomenda")
+	if(isset($_POST['var'])&&isset($_POST['2var'])&&$_POST['var']=="value")   //check for Post inputs
 	{
 	session_start();		
 	require_once "connect.php";
@@ -16,12 +16,12 @@
 		
 		$sekundy=date("H")*3600+60*date("i")+date("s");
 		$_SESSION['s_id']=session_id();	
-		$_SESSION['email']="edgar@pajak.com";
+		$_SESSION['email']="email";
 		$lastId = $_POST['lastId'];
 		$polaczenie->query(sprintf("UPDATE `users` SET `sesja`='%s', `last_logged`=$sekundy,`last_indeks`=$lastId WHERE email='%s'",mysqli_real_escape_string($polaczenie,$_SESSION['s_id']),
 		mysqli_real_escape_string($polaczenie,$_SESSION['email'])));
 		
-		$rezultat=$polaczenie->query("SELECT * FROM komendy_Edgar ORDER BY id DESC LIMIT 1");
+		$rezultat=$polaczenie->query("SELECT * FROM col ORDER BY id DESC LIMIT 1");
 		if($rezultat)
 			{			
 
